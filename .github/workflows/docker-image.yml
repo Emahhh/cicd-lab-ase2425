@@ -46,3 +46,20 @@ jobs:
     - name: Run the STRING tests
       run: newman run ./tests/string_ut.postman_collection.json
 
+  build-and-test-everything:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build and run the whole system using Docker Compose
+      run: docker compose up -d
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+
+    - name: Install Newman
+      run: npm install -g newman
+    
+    - name: Run the STRING tests
+      run: newman run ./tests/integration.postman_collection.json
+
