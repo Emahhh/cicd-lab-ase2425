@@ -14,5 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build -t calc-image-lab07-testing -f Dockerfile_test ./calc
+    - name: Build the CALC Docker image
+      run: docker build -t calc-image-lab07-testing -f Dockerfile_test ./src/calc
