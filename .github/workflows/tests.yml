@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: INTEGRATION AND UNIT TESTS
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
 jobs:
 
   build-and-test-calc-image:
+    name: Build and Test CALC Image (UNIT TEST)
     runs-on: ubuntu-latest
 
     steps:
@@ -28,6 +29,7 @@ jobs:
       run: newman run ./tests/calc_ut.postman_collection.json
 
   build-and-test-string-image:
+    name: Build and Test STRING Image (UNIT TEST)
     runs-on: ubuntu-latest
 
     steps:
@@ -47,6 +49,7 @@ jobs:
       run: newman run ./tests/string_ut.postman_collection.json
 
   build-and-test-everything:
+    name: Build and Test Everything (INTEGRATION TEST)
     runs-on: ubuntu-latest
 
     steps:
@@ -62,4 +65,3 @@ jobs:
     
     - name: Run the STRING tests
       run: newman run ./tests/integration.postman_collection.json
-
