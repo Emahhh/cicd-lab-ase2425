@@ -8,8 +8,7 @@ on:
 
 jobs:
 
-  build:
-
+  build-and-test-calc-image:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +26,23 @@ jobs:
     
     - name: Run the CALC tests
       run: newman run ./tests/calc_ut.postman_collection.json
+
+  build-and-test-string-image:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build and run the STRING Docker image
+      run: |
+          docker build -t string-image-lab07-testing -f ./src/string/Dockerfile_test ./src/string
+          docker run -d -p 5000:5000 --name string-container-lab07-test string-image-lab07-testing
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+
+    - name: Install Newman
+      run: npm install -g newman
+    
+    - name: Run the STRING tests
+      run: newman run ./tests/string_ut.postman_collection.json
+
