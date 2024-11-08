@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build and run the CALC Docker image
       run: docker build -t calc-image-lab07-testing -f ./src/calc/Dockerfile_test ./src/calc
-            docker run -d -p 5000:5000 --name calc-container-lab07-test calc-image-lab07-testing
+            docker run -p 5000:5000 --name calc-container-lab07-test calc-image-lab07-testing -d
 
     - name: Install Node.js
       uses: actions/setup-node@v4
