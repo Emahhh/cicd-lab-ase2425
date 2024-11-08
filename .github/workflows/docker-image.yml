@@ -14,5 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build the CALC Docker image
+    - name: Build and run the CALC Docker image
       run: docker build -t calc-image-lab07-testing -f ./src/calc/Dockerfile_test ./src/calc
+            docker run -d -p 5000:5000 --name calc-container-lab07-test calc-image-lab07-testing
+
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '14'
+
+    - name: Install Newman
+      run: npm install -g newman
+    
+    - name: Run the CALC tests
+      run: newman run ./tests/calc_ut.postman_collection.json
